@@ -16,7 +16,7 @@ ADDONS = {}
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "coleta (+http://www.yourdomain.com)"
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -25,6 +25,28 @@ ROBOTSTXT_OBEY = True
 #CONCURRENT_REQUESTS = 16
 CONCURRENT_REQUESTS_PER_DOMAIN = 1
 DOWNLOAD_DELAY = 1
+RANDOMIZE_DOWNLOAD_DELAY = True
+
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 550,
+}
+
+DEFAULT_REQUEST_HEADERS = {
+    'authority': 'lista.mercadolivre.com.br',
+    'accept': '*/*',
+    'accept-language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+    'cache-control': 'no-cache',
+    'pragma': 'no-cache',
+    'referer': 'https://lista.mercadolivre.com.br/',
+    'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="13"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Linux"',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+}
+
 
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
